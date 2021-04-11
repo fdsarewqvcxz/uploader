@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  uploader:
+    build: uploader
+    container_name: uploader
+    command: python -m app
+    expose:
+      - 5000
+    networks:
+      - uploader-networks
+    working_dir: /projects/uploader
+    volumes:
+      - uploader_log_volume:/projects/uploader/logs
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      TZ: Asia/Seoul
+      PYTHONBREAKPOINT: 0
+      FLASK_APP: /projects/uploader/app.py
+      FLASK_ENV: production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5040/ping"]
+      interval: 1m
+      timeout: 5s
+      retries: 2
+
+  nginx:
+#    build: ./nginx
+    image: nginx:1.19
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - uploader
+    volumes:
+      - nginx_log_volume:/var/log/nginx
+    networks:
+      - uploader-networks
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      TZ: Asia/Seoul
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status"]
+      interval: 1m
+      timeout: 5s
+      retries: 2
+
+networks:
+  uploader-networks:
+
+volumes:
+  uploader_log_volume:
+  nginx_log_volume:
