@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-api_blueprint = Blueprint("users", __name__)
+api_blueprint = Blueprint(__name__, __name__)
 controller = None
 
 
