@@ -43,9 +43,9 @@ services:
       - nginx_log_volume:/var/log/nginx
     networks:
       - uploader-networks
-#    deploy:
-#      restart_policy:
-#        condition: on-failure
+    deploy:
+      restart_policy:
+        condition: always
     environment:
       TZ: Asia/Seoul
     healthcheck:
@@ -53,6 +53,7 @@ services:
       interval: 5m
       timeout: 5s
       retries: 2
+
   certbot:
     image: certbot/certbot
     container_name: certbot
