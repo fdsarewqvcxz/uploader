@@ -2,6 +2,7 @@ import io
 from typing import Tuple
 
 import boto3
+from flask import current_app
 
 from models import db
 from models.file import File
@@ -14,7 +15,11 @@ class FilesController:
         db.session.add(new_file)
         db.session.flush()
 
-        s3 = boto3.resource("s3")
+        s3 = boto3.resource(
+            "s3",
+            aws_access_key_id=current_app.config["AWS_ACCESS_KEY_ID"],
+            aws_secret_access_key=current_app.config["AWS_SECRET_ACCESS_KEY"],
+        )
         s3.Bucket("uploaderfiles").put_object(
             Key=f"{new_file.user_id}/{new_file.upload_file_name}", Body=file
         )
@@ -29,7 +34,11 @@ class FilesController:
             raise Exception("File not exist")
         if access_user.id != file.user_id:
             raise Exception("Permission error")
-        s3 = boto3.resource("s3")
+        s3 = boto3.resource(
+            "s3",
+            aws_access_key_id=current_app.config["AWS_ACCESS_KEY_ID"],
+            aws_secret_access_key=current_app.config["AWS_SECRET_ACCESS_KEY"],
+        )
 
         buffer = io.BytesIO()
         s3.Bucket("uploaderfiles").download_fileobj(
@@ -48,7 +57,11 @@ class FilesController:
 
         file.delete()
 
-        s3 = boto3.resource("s3")
+        s3 = boto3.resource(
+            "s3",
+            aws_access_key_id=current_app.config["AWS_ACCESS_KEY_ID"],
+            aws_secret_access_key=current_app.config["AWS_SECRET_ACCESS_KEY"],
+        )
         obj = s3.Object(
             "uploaderfiles", f"{file.user_id}/{file.upload_file_name}"
         )
