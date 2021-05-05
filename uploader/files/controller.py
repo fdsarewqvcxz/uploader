@@ -5,15 +5,17 @@ import boto3
 from flask import current_app
 
 from models import db
-from models.file import File
+from models import File
 from utils.exception import ClientError
 from utils.exception import ForbiddenError
 
 
 class FilesController:
     @staticmethod
-    def create_file(access_user, file) -> dict:
-        new_file = File(user=access_user, file_name=file.filename)
+    def create_file(
+        access_user, file: bytes, filename: str, folder_id: int
+    ) -> dict:
+        new_file = File(user=access_user, name=filename, folder_id=folder_id)
         db.session.add(new_file)
         db.session.flush()
 
@@ -23,7 +25,7 @@ class FilesController:
             aws_secret_access_key=current_app.config["AWS_SECRET_ACCESS_KEY"],
         )
         s3.Bucket("uploaderfiles").put_object(
-            Key=f"{new_file.user_id}/{new_file.upload_file_name}", Body=file
+            Key=f"{new_file.user_id}/{new_file.uploaded_name}", Body=file
         )
 
         db.session.commit()
@@ -44,10 +46,10 @@ class FilesController:
 
         buffer = io.BytesIO()
         s3.Bucket("uploaderfiles").download_fileobj(
-            f"{file.user_id}/{file.upload_file_name}", buffer
+            f"{file.user_id}/{file.uploaded_name}", buffer
         )
         buffer.seek(0)
-        return buffer, file.file_name
+        return buffer, file.name
 
     @staticmethod
     def delete_file(access_user, file_id: int):
@@ -64,9 +66,7 @@ class FilesController:
             aws_access_key_id=current_app.config["AWS_ACCESS_KEY_ID"],
             aws_secret_access_key=current_app.config["AWS_SECRET_ACCESS_KEY"],
         )
-        obj = s3.Object(
-            "uploaderfiles", f"{file.user_id}/{file.upload_file_name}"
-        )
+        obj = s3.Object("uploaderfiles", f"{file.user_id}/{file.uploaded_name}")
         response = obj.delete()
         db.session.commit()
         return {"success": True}

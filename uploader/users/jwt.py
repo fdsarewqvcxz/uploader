@@ -2,7 +2,7 @@ from typing import Optional
 
 from flask_jwt_extended import JWTManager
 
-from models.user import User
+from models import User
 
 jwt = JWTManager()
 

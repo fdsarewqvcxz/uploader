@@ -18,7 +18,7 @@
 ## Users <a id="users-title"></a>
 ### /users <a id="users-sub-title"></a>
 #### [POST] register user <a id="post-users"></a>
-새 계정을 생성합니다.
+새 계정을 생성합니다. root folder도 함께 생성합니다.
 
 * Body
 

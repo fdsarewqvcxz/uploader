@@ -1,7 +1,8 @@
 from flask_jwt_extended import create_access_token
 
 from models import db
-from models.user import User
+from models import Folder
+from models import User
 from utils.exception import ClientError
 
 
@@ -10,6 +11,11 @@ class UserController:
     def create_user(name: str, password: str):
         new_user = User(name=name, password=password)
         db.session.add(new_user)
+        db.session.flush()
+
+        root_folder = Folder(user_id=new_user.id, name="root")
+        db.session.add(root_folder)
+
         db.session.commit()
         return {"new_user": new_user.id}
 

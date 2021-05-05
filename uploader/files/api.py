@@ -1,3 +1,5 @@
+import base64
+
 from flask import jsonify
 from flask import request
 from flask import send_file
@@ -13,8 +15,13 @@ route = api_blueprint.route
 @route("/files", methods=["POST"])
 @jwt_required()
 def create_file():
-    file = request.files.get("file")
-    data = controller.create_file(access_user=current_user, file=file)
+    # file = request.files.get("file")
+    data = controller.create_file(
+        access_user=current_user,
+        file=base64.b64decode(request.json.get("file")),
+        filename=request.json.get("filename"),
+        folder_id=request.json.get("folder_id"),
+    )
     return jsonify(data)
 
 
