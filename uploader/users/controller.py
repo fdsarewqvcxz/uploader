@@ -2,6 +2,7 @@ from flask_jwt_extended import create_access_token
 
 from models import db
 from models.user import User
+from utils.exception import ClientError
 
 
 class UserController:
@@ -16,8 +17,8 @@ class UserController:
     def auth(username: str, password: str):
         user = User.query.filter_by(username=username).one_or_none()
         if user is None:
-            raise Exception("User not found")
+            raise ClientError("User not found")
         if not user.check_password(password):
-            raise Exception("Password error")
+            raise ClientError("Password error")
         access_token = create_access_token(identity=user)
         return {"access_token": access_token}

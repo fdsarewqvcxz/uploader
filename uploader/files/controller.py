@@ -6,6 +6,8 @@ from flask import current_app
 
 from models import db
 from models.file import File
+from utils.exception import ClientError
+from utils.exception import ForbiddenError
 
 
 class FilesController:
@@ -31,9 +33,9 @@ class FilesController:
     def get_file(access_user, file_id: int) -> Tuple[io.BytesIO, str]:
         file = File.query.get(file_id)
         if file is None:
-            raise Exception("File not exist")
+            raise ClientError("File not exist")
         if access_user.id != file.user_id:
-            raise Exception("Permission error")
+            raise ForbiddenError
         s3 = boto3.resource(
             "s3",
             aws_access_key_id=current_app.config["AWS_ACCESS_KEY_ID"],
@@ -51,9 +53,9 @@ class FilesController:
     def delete_file(access_user, file_id: int):
         file = File.query.get(file_id)
         if file is None:
-            raise Exception("File not exist")
+            raise ClientError("File not exist")
         if access_user.id != file.user_id:
-            raise Exception("Permission error")
+            raise ForbiddenError
 
         file.delete()
 

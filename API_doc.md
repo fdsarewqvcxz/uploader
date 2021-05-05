@@ -114,6 +114,10 @@ curl -X "POST" "https://upload-now-box.cf/files" \
 * Response (status code: 200)
   + file
 
+* Exception
+  + "File not Exist": file_id에 해당하는 file이 존재하지 않은 경우
+  + "ForbiddenError": file의 소유자가 아닌 경우
+  
 * Example
 ```commandline
 curl "https://upload-now-box.cf/files/2" \
@@ -133,6 +137,10 @@ curl "https://upload-now-box.cf/files/2" \
   "success": true
 }
 ```
+
+* Exception
+  + "File not Exist": file_id에 해당하는 file이 존재하지 않은 경우
+  + "ForbiddenError": file의 소유자가 아닌 경우
 
 * Example
 ```commandline
