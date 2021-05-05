@@ -7,15 +7,15 @@ from utils.exception import ClientError
 
 class UserController:
     @staticmethod
-    def create_user(username: str, password: str):
-        new_user = User(username=username, password=password)
+    def create_user(name: str, password: str):
+        new_user = User(name=name, password=password)
         db.session.add(new_user)
         db.session.commit()
         return {"new_user": new_user.id}
 
     @staticmethod
-    def auth(username: str, password: str):
-        user = User.query.filter_by(username=username).one_or_none()
+    def auth(name: str, password: str):
+        user = User.query.filter_by(name=name).one_or_none()
         if user is None:
             raise ClientError("User not found")
         if not user.check_password(password):

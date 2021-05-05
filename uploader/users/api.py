@@ -10,8 +10,7 @@ route = api_blueprint.route
 @route("/users", methods=["POST"])
 def create_user():
     data = controller.create_user(
-        username=request.json.get("username"),
-        password=request.json.get("password"),
+        name=request.json.get("name"), password=request.json.get("password")
     )
     return jsonify(data)
 
@@ -19,7 +18,7 @@ def create_user():
 @route("/auth", methods=["POST"])
 def auth():
     data = controller.auth(
-        username=request.json.get("username"),
+        name=request.json.get("name"),
         password=request.json.get("password"),
     )
     return jsonify(data)
