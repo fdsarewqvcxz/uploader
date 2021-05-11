@@ -24,7 +24,7 @@
 
 |Parameter|Default value|Description|Param type|Data type|Required|
 |---|---|---|---|---|---|
-|username|None|사용자 아이디|formData|string|true|
+|name|None|사용자 아이디|formData|string|true|
 |password|None|사용자 비밀번호|formData|SHA256 encrypted string|true|
 
 * Response (status code: 200)
@@ -40,7 +40,7 @@
 curl -X "POST" "https://upload-now-box.cf/users" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
-  "username": "firstuser",
+  "name": "firstuser",
   "password": "20504cdfddaad0b590ca53c4861edd4f5f5cf9c348c38295bd2dbf0e91bca4c3"
 }'
 ```
@@ -53,7 +53,7 @@ Login API 입니다. access_token으로 JWT token을 반환합니다.
 
 |Parameter|Default value|Description|Param type|Data type|Required|
 |---|---|---|---|---|---|
-|username|None|사용자 아이디|formData|string|true|
+|name|None|사용자 아이디|formData|string|true|
 |password|None|사용자 비밀번호|formData|SHA256 encrypted string|true|
 
 * Response (status code: 200)
@@ -65,7 +65,7 @@ Login API 입니다. access_token으로 JWT token을 반환합니다.
 
 * Exception
 
-  + "User not found": username에 해당하는 유저가 존재하지 않을 경우
+  + "User not found": name에 해당하는 유저가 존재하지 않을 경우
   + "Password error": password 검증에 실패할 경우
 
 * Example
@@ -73,7 +73,7 @@ Login API 입니다. access_token으로 JWT token을 반환합니다.
 curl -X "POST" "https://upload-now-box.cf/auth" \
      -H 'Content-Type: application/json; charset=utf-8' \
      -d $'{
-  "username": "firstuser2",
+  "name": "firstuser2",
   "password": "20504cdfddaad0b590ca53c4861edd4f5f5cf9c348c38295bd2dbf0e91bca4c3"
 }'
 ```
