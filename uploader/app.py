@@ -6,6 +6,7 @@ from blueprints import register_users
 from config import Config
 from models import init_db
 from users.jwt import init_jwt
+from utils.exception import init_error_handler
 
 
 def create_app(config):
@@ -13,6 +14,7 @@ def create_app(config):
     new_app.config.from_object(config)
     init_db(new_app)
     init_jwt(new_app)
+    init_error_handler(new_app)
     register_config(new_app)
     register_files(new_app)
     register_users(new_app)

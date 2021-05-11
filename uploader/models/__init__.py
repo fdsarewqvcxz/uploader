@@ -9,3 +9,4 @@ def init_db(app):
 
 from .file import File
 from .user import User
+from .folder import Folder

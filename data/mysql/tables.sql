@@ -1,0 +1,25 @@
+CREATE TABLE `users` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(30) NOT NULL UNIQUE,
+    `password` VARCHAR(300) NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET='utf8mb4' COLLATE='utf8mb4_0900_ai_ci';
+
+CREATE TABLE `folders` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    `parent_id` INT UNSIGNED DEFAULT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    FOREIGN KEY (`parent_id`) REFERENCES `folders` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET='utf8mb4' COLLATE='utf8mb4_0900_ai_ci';
+
+CREATE TABLE `files` (
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `uploaded_name` VARCHAR(255) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
+    `folder_id` INT UNSIGNED NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET='utf8mb4' COLLATE='utf8mb4_0900_ai_ci';
