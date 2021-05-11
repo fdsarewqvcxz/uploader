@@ -14,7 +14,7 @@ services:
       - uploader_log_volume:/projects/uploader/logs
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
     environment:
       TZ: Asia/Seoul
       PYTHONBREAKPOINT: 0
@@ -45,7 +45,7 @@ services:
       - uploader-networks
     deploy:
       restart_policy:
-        condition: always
+        condition: any
     environment:
       TZ: Asia/Seoul
     healthcheck:
