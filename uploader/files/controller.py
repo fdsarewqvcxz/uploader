@@ -10,7 +10,7 @@ from utils.exception import ClientError
 from utils.exception import ForbiddenError
 
 
-class FilesController:
+class FileController:
     @staticmethod
     def create_file(
         access_user, file: bytes, filename: str, folder_id: int
