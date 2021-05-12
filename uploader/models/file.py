@@ -16,7 +16,13 @@ class File(db.Model, Deletable):
     )
 
     user = db.relationship("User", foreign_keys=user_id)
-    folder = db.relationship("Folder", foreign_keys=folder_id, lazy="select")
+    folder = db.relationship(
+        "Folder",
+        foreign_keys=folder_id,
+        uselist=False,
+        lazy="select",
+        back_populates="files",
+    )
 
     def __init__(self, user_id, name: str, folder_id: int):
         extension = name.split(".")[-1]

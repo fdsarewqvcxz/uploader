@@ -2,6 +2,7 @@ from flask import Flask
 
 from blueprints import register_config
 from blueprints import register_files
+from blueprints import register_folders
 from blueprints import register_users
 from config import Config
 from models import init_db
@@ -17,6 +18,7 @@ def create_app(config):
     init_jwt(new_app)
     register_config(new_app)
     register_users(new_app)
+    register_folders(new_app)
     register_files(new_app)
     return new_app
 
