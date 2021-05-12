@@ -81,12 +81,17 @@ curl -X "POST" "https://upload-now-box.cf/auth" \
 ## Files <a id="files-title"></a>
 ### /files <a id="files-sub-title"></a>
 #### [POST] file upload <a id="post-files"></a>
+file을 생성합니다.
+
 
 * Body
   
 |Parameter|Default value|Description|Param type|Data type|Required|
 |---|---|---|---|---|---|
-|file|None|file for upload|formData|multipart|true|
+|file|None|file for upload|formData|base64 encoded file|true|
+|filename|None|file name|formData|string|true|
+|folder_id|None|folder id for file|formData|integer|true|
+
 
 * Response (status code: 200)
 ```json
@@ -98,13 +103,20 @@ curl -X "POST" "https://upload-now-box.cf/auth" \
 * Example
 ```commandline
 curl -X "POST" "https://upload-now-box.cf/files" \
-     -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYxODQxMDU3MSwianRpIjoiMjM2MmI5YzgtZjc1OS00NDAxLTljNTQtZWEyYWYxNTkwMzk3IiwibmJmIjoxNjE4NDEwNTcxLCJ0eXBlIjoiYWNjZXNzIiwiaWRlbnRpdHkiOjEsImV4cCI6MTYxOTAxNTM3MSwiY3JlYXRlZF9hdCI6IjIwMjEtMDQtMTRUMjM6Mjk6MjcifQ.-rFVaVoap2UsfC8QrltNE32qZfGEpcbZzHf-SBpe1hk' \
-     -H 'Content-Type: multipart/form-data; charset=utf-8; boundary=__X_PAW_BOUNDARY__' \
-     -F "file="
+     -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYyMDgzNjczMywianRpIjoiYzMxODc3MGEtMWE1NC00ZjYwLWJkNGItNWZmMmMyMzkwNGE5IiwidHlwZSI6ImFjY2VzcyIsImlkZW50aXR5IjoxLCJuYmYiOjE2MjA4MzY3MzMsImV4cCI6MTYyMTQ0MTUzMywiY3JlYXRlZF9hdCI6IjIwMjEtMDUtMDVUMTQ6NTU6MzYifQ.9pLCpFjEqkvWoxc76N8zTCUPgl90ojP893qTja_nYZo' \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "folder_id": 1,
+  "file": "base64 encoded file",
+  "filename": "test.jpg"
+}'
 ```
 
 ### /files/<file_id> <a id="files-fileid-sub-title"></a>
 #### [GET] file download <a id="get-files"></a>
+file download
+
+
 * Parameter
 
 |Parameter|Default value|Description|Param type|Data type|Required|
@@ -125,6 +137,9 @@ curl "https://upload-now-box.cf/files/2" \
 ```
 
 #### [DELETE] file delete <a id="delete-files"></a>
+file 삭제
+
+
 * Parameter
 
 |Parameter|Default value|Description|Param type|Data type|Required|
@@ -151,6 +166,9 @@ curl -X "DELETE" "https://upload-now-box.cf/files/2" \
 ## Config <a id="config-title"></a>
 ### /ping <a id="ping-sub-title"></a>
 #### [GET] for health check <a id="get-ping"></a>
+health check 용 API
+
+
 * Response (status code: 200)
 ```json
 {
