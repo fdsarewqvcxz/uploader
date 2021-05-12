@@ -6,7 +6,7 @@ class ClientError(Exception):
     message = None
     error_num = 100
 
-    def __init__(self, message: str, error_number: int = error_num):
+    def __init__(self, message: str = None, error_number: int = error_num):
         self.message = message
         self.error_num = error_number
 
