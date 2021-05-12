@@ -24,7 +24,7 @@ class File(db.Model, Deletable):
         back_populates="files",
     )
 
-    def __init__(self, user_id, name: str, folder_id: int):
+    def __init__(self, user_id, name: str, folder_id: int) -> None:
         extension = name.split(".")[-1]
 
         self.user_id = user_id
@@ -34,7 +34,7 @@ class File(db.Model, Deletable):
         )
         self.folder_id = folder_id
 
-    def serialize(self):
+    def serialize(self) -> dict:
         return {"id": self.id, "name": self.name}
 
 

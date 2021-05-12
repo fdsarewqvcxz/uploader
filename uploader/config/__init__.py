@@ -22,7 +22,7 @@ class Config:
     JWT_TOKEN_LOCATION = "headers"
 
 
-def create_endpoints():
+def create_endpoints() -> Blueprint:
     global api_blueprint
 
     from config import api

@@ -50,7 +50,7 @@ class FileController:
         return buffer, file.name
 
     @staticmethod
-    def delete_file(access_user, file_id: int):
+    def delete_file(access_user, file_id: int) -> dict:
         file = get_file_by_id(file_id)
         if access_user.id != file.user_id:
             raise ForbiddenError

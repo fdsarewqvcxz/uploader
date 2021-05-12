@@ -16,15 +16,15 @@ class Folder(db.Model, Deletable):
     )
     files = db.relationship("File", back_populates="folder")
 
-    def __init__(self, user_id: int, name: str, parent_id: int = None):
+    def __init__(self, user_id: int, name: str, parent_id: int = None) -> None:
         self.user_id = user_id
         self.name = name
         self.parent_id = parent_id
 
-    def serialize(self):
+    def serialize(self) -> dict:
         return {"id": self.id, "name": self.name, "parent_id": self.parent_id}
 
-    def update(self, **kwargs):
+    def update(self, **kwargs) -> None:
         self.name = kwargs.get("name", self.name)
 
 

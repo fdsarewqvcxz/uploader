@@ -6,13 +6,13 @@ from utils.exception import ForbiddenError
 
 class FolderController:
     @staticmethod
-    def create_folder(access_user, name: str, parent_id: int):
+    def create_folder(access_user, name: str, parent_id: int) -> dict:
         folder = create_folder(user=access_user, name=name, parent_id=parent_id)
         db.session.commit()
         return {"folder_id": folder.id}
 
     @staticmethod
-    def get_folder(access_user, folder_id: int):
+    def get_folder(access_user, folder_id: int) -> dict:
         folder = get_folder_by_id(folder_id)
         if access_user.id != folder.user_id:
             raise ForbiddenError
@@ -23,7 +23,7 @@ class FolderController:
         }
 
     @staticmethod
-    def update_folder(access_user, folder_id: int, name: str):
+    def update_folder(access_user, folder_id: int, name: str) -> dict:
         folder = get_folder_by_id(folder_id)
         if access_user.id != folder.user_id:
             raise ForbiddenError
@@ -32,7 +32,7 @@ class FolderController:
         return {"folder_id": folder.id}
 
     @staticmethod
-    def delete_folder(access_user, folder_id: int):
+    def delete_folder(access_user, folder_id: int) -> dict:
         folder = get_folder_by_id(folder_id)
         if access_user.id != folder.user_id:
             raise ForbiddenError

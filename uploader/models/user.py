@@ -13,12 +13,12 @@ class User(db.Model):
     password = db.Column(db.String(300), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
 
-    def __init__(self, name: str, password: str):
+    def __init__(self, name: str, password: str) -> None:
         self.name = name
         self.set_password(password)
 
-    def set_password(self, password: str):
+    def set_password(self, password: str) -> None:
         self.password = generate_password_hash(password, "pbkdf2:sha256")
 
-    def check_password(self, password: str):
+    def check_password(self, password: str) -> bool:
         return check_password_hash(self.password, password)
