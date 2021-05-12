@@ -8,7 +8,7 @@ from utils.exception import ClientError
 
 class UserController:
     @staticmethod
-    def create_user(name: str, password: str):
+    def create_user(name: str, password: str) -> dict:
         new_user = User(name=name, password=password)
         db.session.add(new_user)
         db.session.flush()
@@ -20,7 +20,7 @@ class UserController:
         return {"new_user": new_user.id}
 
     @staticmethod
-    def auth(name: str, password: str):
+    def auth(name: str, password: str) -> dict:
         user = User.query.filter_by(name=name).one_or_none()
         if user is None:
             raise ClientError("User not found")
