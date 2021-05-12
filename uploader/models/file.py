@@ -1,10 +1,11 @@
 from uuid import uuid4
 
+from models import Deletable
 from models import db
 from utils.exception import ClientError
 
 
-class File(db.Model):
+class File(db.Model, Deletable):
     __tablename__ = "files"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
@@ -29,9 +30,6 @@ class File(db.Model):
 
     def serialize(self):
         return {"id": self.id, "name": self.name}
-
-    def delete(self):
-        db.session.delete(self)
 
 
 def create_file(user, filename: str, folder_id: int) -> File:
