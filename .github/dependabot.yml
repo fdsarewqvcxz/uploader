@@ -5,9 +5,11 @@
 
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
+  - package-ecosystem: "pip" # See documentation for possible values
     directory: "/uploader" # Location of package manifests
     schedule:
       interval: "daily"
       time: "10:00"
       timezone: "Asia/Seoul"
+    target-branch: "develop"
+    insecure-external-code-execution: deny
