@@ -4,12 +4,12 @@ Cloud Storage API 입니다.
 Nginx, Flask, MySQL, Docker를 사용하였습니다.
 
 ## API demo URI
-https://upload-now-box.cf
+~https://upload-now-box.cf~
 
 ## Installation
 docker 설치가 선행되어야 합니다.
 ```commandline
-git clone https://github.com/fdsarewqvcxz/uploader.git
+git clone https://github.com/victorjws/uploader.git
 ```
 
 + `uploader/data/nginx/app.conf` file의 domain을 수정
