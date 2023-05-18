@@ -10,5 +10,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
-          lib: true
+          fail_on_error: true
+#          lib: true
           level: info
