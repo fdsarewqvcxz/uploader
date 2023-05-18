@@ -10,7 +10,7 @@ from utils.exception import ForbiddenError
 class FileController:
     @staticmethod
     def create_file(
-            access_user, file: bytes, filename: str, folder_id: int
+        access_user, file: bytes, filename: str, folder_id: int
     ) -> dict:
         new_file = create_file(
             user=access_user, filename=filename, folder_id=folder_id

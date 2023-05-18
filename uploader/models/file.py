@@ -29,7 +29,7 @@ class File(db.Model, Deletable):
         self.user_id = user_id
         self.name = name
         self.uploaded_name = (
-                str(user_id) + "-" + str(uuid4().hex) + "." + extension
+            str(user_id) + "-" + str(uuid4().hex) + "." + extension
         )
         self.folder_id = folder_id
 

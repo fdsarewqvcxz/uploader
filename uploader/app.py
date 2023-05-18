@@ -1,7 +1,11 @@
 from flask import Flask
 
-from blueprints import register_config, register_files, register_folders, \
-    register_users
+from blueprints import (
+    register_config,
+    register_files,
+    register_folders,
+    register_users,
+)
 from config import Config
 from models import init_db
 from users.jwt import init_jwt
