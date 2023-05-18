@@ -9,4 +9,6 @@ jobs:
       - name: wemake-python-styleguide
         uses: wemake-services/wemake-python-styleguide@0.17.0
         with:
-          reporter: github-pr-review
+          reporter: github-pr-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
