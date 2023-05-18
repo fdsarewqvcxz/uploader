@@ -1,8 +1,8 @@
 name: reviewdog
 on: [ pull_request ]
 jobs:
-  pyright:
-    name: pyright
+  wemake-python-styleguide:
+    name: wemake-python-styleguide
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,4 +1,5 @@
 from flask import Flask
+
 from blueprints import (
     register_config,
     register_files,
