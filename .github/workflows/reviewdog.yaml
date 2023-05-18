@@ -6,11 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: pip install -r requirements.txt
-      - uses: jordemort/action-pyright@v1
+      - uses: wemake-services/wemake-python-styleguide
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-check
-          fail_on_error: true
-          lib: true
-          level: info
+          reporter: github-pr-review
