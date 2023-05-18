@@ -10,5 +10,6 @@ jobs:
         uses: wemake-services/wemake-python-styleguide@0.17.0
         with:
           reporter: github-pr-check
+          path: ./uploader
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
