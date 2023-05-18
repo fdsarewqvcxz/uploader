@@ -1,8 +1,5 @@
 from flask_jwt_extended import create_access_token
-
-from models import db
-from models import Folder
-from models import User
+from models import Folder, User, db
 from utils.exception import ClientError
 
 

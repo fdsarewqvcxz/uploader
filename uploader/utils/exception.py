@@ -1,7 +1,6 @@
 from typing import Tuple
 
-from flask import Response
-from flask import jsonify
+from flask import Response, jsonify
 
 
 class ClientError(Exception):
@@ -10,7 +9,7 @@ class ClientError(Exception):
     error_num = 100
 
     def __init__(
-        self, message: str = None, error_number: int = error_num
+            self, message: str = None, error_number: int = error_num
     ) -> None:
         self.message = message
         self.error_num = error_number

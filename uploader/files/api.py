@@ -1,13 +1,8 @@
 import base64
 
-from flask import jsonify
-from flask import request
-from flask import send_file
-from flask_jwt_extended import current_user
-from flask_jwt_extended import jwt_required
-
-from files import api_blueprint
-from files import controller
+from files import api_blueprint, controller
+from flask import jsonify, request, send_file
+from flask_jwt_extended import current_user, jwt_required
 
 route = api_blueprint.route
 

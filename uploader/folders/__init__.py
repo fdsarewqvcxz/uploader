@@ -9,6 +9,4 @@ def create_endpoints(_controller) -> Blueprint:
     global controller
     controller = _controller
 
-    from folders import api
-
     return api_blueprint

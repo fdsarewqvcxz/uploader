@@ -1,6 +1,4 @@
-from models import db
-from models import create_folder
-from models import get_folder_by_id
+from models import create_folder, db, get_folder_by_id
 from utils.exception import ForbiddenError
 
 

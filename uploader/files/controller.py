@@ -3,17 +3,14 @@ from typing import Tuple
 
 import boto3
 from flask import current_app
-
-from models import db
-from models import create_file
-from models import get_file_by_id
+from models import create_file, db, get_file_by_id
 from utils.exception import ForbiddenError
 
 
 class FileController:
     @staticmethod
     def create_file(
-        access_user, file: bytes, filename: str, folder_id: int
+            access_user, file: bytes, filename: str, folder_id: int
     ) -> dict:
         new_file = create_file(
             user=access_user, filename=filename, folder_id=folder_id
