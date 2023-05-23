@@ -1,8 +1,8 @@
 name: reviewdog
 on: [ pull_request ]
 jobs:
-  pyright:
-    name: pyright
+  review_pr:
+    name: Review PR
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,6 +16,12 @@ jobs:
           workdir: uploader
           python_platform: Linux
           python_version: 3.11
+      - uses: tsuyoshicho/action-mypy@v3
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: info
+          workdir: uploader
       - uses: jordemort/action-pyright@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
@@ -25,14 +31,3 @@ jobs:
           workdir: uploader
           python_platform: Linux
           python_version: 3.11
-  mypy:
-    name: mypy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: tsuyoshicho/action-mypy@v3
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
-          workdir: uploader
