@@ -11,8 +11,28 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
           reporter: github-pr-review # Change reporter.
-#          lib: true
+          lib: true
           level: info
           workdir: uploader
           python_platform: Linux
           python_version: 3.11
+      - uses: jordemort/action-pyright@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
+          reporter: github-pr-review # Change reporter.
+          lib: true
+          level: info
+          workdir: uploader
+          python_platform: Linux
+          python_version: 3.11
+  mypy:
+    name: mypy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tsuyoshicho/action-mypy@v3
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+          workdir: uploader
