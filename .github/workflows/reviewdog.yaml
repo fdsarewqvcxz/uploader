@@ -9,5 +9,9 @@ jobs:
       - uses: jordemort/action-pyright@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
-          reporter: github-pr-review # Change reporter.
-          lib: true
+          reporter: github-pr-checks # Change reporter.
+#          lib: true
+          level: info
+          workdir: uploader
+          python_platform: Linux
+          python_version: 3.11
