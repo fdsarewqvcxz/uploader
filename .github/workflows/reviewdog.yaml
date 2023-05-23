@@ -1,15 +1,13 @@
 name: reviewdog
 on: [ pull_request ]
 jobs:
-  wemake-python-styleguide:
-    name: wemake-python-styleguide
+  pyright:
+    name: pyright
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: wemake-python-styleguide
-        uses: wemake-services/wemake-python-styleguide@0.17.0
+      - uses: jordemort/action-pyright@v1
         with:
-          reporter: github-pr-check
-          path: ./uploader
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # You need this
+          reporter: github-pr-review # Change reporter.
+          lib: true
