@@ -14,15 +14,15 @@ jobs:
       - uses: tsuyoshicho/action-mypy@v3
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: $REPORTER
-          workdir: $WORKDIR
-          level: $LEVEL
+          reporter: ${{ env.REPORTER }}
+          workdir: ${{ env.WORKDIR}}
+          level: ${{ env.LEVEL}}
       - uses: jordemort/action-pyright@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: $REPORTER
-          workdir: $WORKDIR
-          level: $LEVEL
+          reporter: ${{ env.REPORTER }}
+          workdir: ${{ env.WORKDIR}}
+          level: ${{ env.LEVEL}}
           lib: true
           python_platform: Linux
           python_version: 3.11
