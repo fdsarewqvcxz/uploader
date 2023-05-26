@@ -1,10 +1,6 @@
-from flask import jsonify
-from flask import request
-from flask_jwt_extended import current_user
-from flask_jwt_extended import jwt_required
-
-from folders import api_blueprint
-from folders import controller
+from flask import jsonify, request
+from flask_jwt_extended import current_user, jwt_required
+from folders import api_blueprint, controller
 
 route = api_blueprint.route
 

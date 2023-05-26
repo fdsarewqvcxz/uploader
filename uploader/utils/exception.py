@@ -1,7 +1,6 @@
 from typing import Tuple
 
-from flask import Response
-from flask import jsonify
+from flask import Response, jsonify
 
 
 class ClientError(Exception):

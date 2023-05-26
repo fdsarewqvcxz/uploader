@@ -1,8 +1,5 @@
-from flask import jsonify
-from flask import request
-
-from users import api_blueprint
-from users import controller
+from flask import jsonify, request
+from users import api_blueprint, controller
 
 route = api_blueprint.route
 

@@ -1,0 +1,28 @@
+name: reviewdog
+on: [ pull_request ]
+env:
+  REPORTER: github-pr-review
+  WORKDIR: uploader
+  LEVEL: info
+jobs:
+  review_pr:
+    name: Review PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install -r requirements.txt
+      - uses: tsuyoshicho/action-mypy@v3
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: ${{ env.REPORTER }}
+          workdir: ${{ env.WORKDIR}}
+          level: ${{ env.LEVEL}}
+      - uses: jordemort/action-pyright@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: ${{ env.REPORTER }}
+          workdir: ${{ env.WORKDIR}}
+          level: ${{ env.LEVEL}}
+          lib: true
+          python_platform: Linux
+          python_version: 3.11

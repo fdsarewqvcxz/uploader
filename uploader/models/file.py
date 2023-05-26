@@ -1,7 +1,6 @@
 from uuid import uuid4
 
-from models import Deletable
-from models import db
+from models import Deletable, db
 from utils.exception import ClientError
 
 

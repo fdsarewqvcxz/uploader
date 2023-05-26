@@ -1,13 +1,9 @@
 import base64
 
-from flask import jsonify
-from flask import request
-from flask import send_file
-from flask_jwt_extended import current_user
-from flask_jwt_extended import jwt_required
+from flask import jsonify, request, send_file
+from flask_jwt_extended import current_user, jwt_required
 
-from files import api_blueprint
-from files import controller
+from files import api_blueprint, controller
 
 route = api_blueprint.route
 
@@ -18,7 +14,7 @@ def create_file():
     # file = request.files.get("file")
     data = controller.create_file(
         access_user=current_user,
-        file=base64.b64decode(request.json.get("file")),
+        file=base64.b64decode( request.json.get("file")),
         filename=request.json.get("filename"),
         folder_id=request.json.get("folder_id"),
     )

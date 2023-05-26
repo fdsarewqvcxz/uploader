@@ -1,7 +1,5 @@
-from flask import Response
-from flask import jsonify
-
 from config import api_blueprint
+from flask import Response, jsonify
 
 route = api_blueprint.route
 

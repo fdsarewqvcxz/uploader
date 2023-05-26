@@ -3,10 +3,7 @@ from typing import Tuple
 
 import boto3
 from flask import current_app
-
-from models import db
-from models import create_file
-from models import get_file_by_id
+from models import create_file, db, get_file_by_id
 from utils.exception import ForbiddenError
 
 

@@ -1,9 +1,7 @@
 from datetime import timedelta
 
 from flask import Blueprint
-
 from utils import load_json
-
 
 api_blueprint = Blueprint(__name__, __name__)
 
@@ -24,7 +22,5 @@ class Config:
 
 def create_endpoints() -> Blueprint:
     global api_blueprint
-
-    from config import api
 
     return api_blueprint
